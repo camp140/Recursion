@@ -46,3 +46,15 @@ def fib(n):
 # print(fib(7))
 
 def binarySearch(lo, hi, x, l):
+    if hi < lo:
+        return None
+    mid = (lo+hi)//2
+    if x == l[mid]:
+        return mid
+    elif l[mid] < x:
+        return binarySearch(mid+1, hi, x, l)
+    else:
+        return binarySearch(lo, mid-1, x, l)
+
+# l = [1,2,3,4,5,6,7,8,9,10]
+# print(binarySearch(0,9,5,l))
