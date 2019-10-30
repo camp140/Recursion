@@ -107,3 +107,170 @@ def sum3(l):
 
 # l = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
 # print(sum3(l))
+
+def printForw(L, i):  # print list forward
+    if i < len(L):
+        print(L[i], end=' ')
+        printForw(L, i + 1)
+    else:
+        print()
+
+
+def printBack(L, i):  # print list backward
+    if i < len(L):
+        printBack(L, i + 1)
+        print(L[i], end=' ')
+    else:
+        print()
+
+
+# L = [2, 3, 5, 7, 11]
+# print(L)
+# printForw(L, 0)
+# printBack(L, 0)
+
+
+def printlistForw(l, n):
+    if n > 1:
+        printlistForw(l, n - 1)
+        print(l[n - 1], end=' ')
+    elif n == 1:
+        print(l[0], end=' ')
+
+
+# l2 = [1, 2, 3]
+# print(l2)
+# printlistForw(l2, len(l2))
+
+
+# --------------------------
+def printlistBkw(l, n):
+    if n > 1:
+        print(l[n - 1], end=' ')
+        printlistBkw(l, n - 1)
+    elif n == 1:
+        print(l[0], end=' ')
+
+
+# l2 = [1, 2, 3]
+# print(l2)
+# printlistBkw(l2, len(l2))
+
+
+def app(l, n):
+    if n == 1:
+        l.append(1)
+    else:
+        app(l, n - 1)
+        l.append(n)
+
+
+# l = [0]
+# app(l, 5)
+# print(l)
+
+
+def appB(l, n):
+    if n == 1:
+        l.append(1)
+    else:
+        l.append(n)
+        appB(l, n - 1)
+
+
+# l = [0]
+# appB(l, 5)
+# print(l)
+
+class node():
+    def __init__(self, d, nxt=None):
+        self.data = d
+        if nxt is None:
+            self.next = None
+        else:
+            self.next = nxt
+
+
+def printList(h):
+    if h is not None:
+        print(h.data, end=' ')
+        printList(h.next)
+
+
+def createLLL1(h, i):  # create linked list from list 1
+    global fromList
+    if i >= 0:
+        last = node(fromList[i], h)
+        p = createLLL1(last, i - 1)
+        return p
+    else:
+        return h
+
+
+# fromList = [2, 5, 4, 8, 6, 7, 3, 1]
+# print('---- createLLL1 -----')
+# h = createLLL1(None, len(fromList) - 1)  # 2nd parameter = last index
+# printList(h)
+# print('\n---------------------')
+
+
+def createLLL2(h, l):  # create linked list from list 2
+    if l != []:
+        p = node(l[-1], h)
+        p = createLLL2(p, l[:-1])
+        return p
+    else:
+        return h
+
+
+# list = [2, 5, 4, 8, 6, 7, 3, 1]
+# print('----- createLLL2 ------')
+# h = createLLL2(None, list)
+# printList(h)
+# print('\n-----------------------')
+
+
+def createLLL3(i, last_i, l):  # create linked list from list 3
+    if i is last_i:
+        return node(l[i])
+    else:
+        h2 = createLLL3(i + 1, last_i, l)
+        h = node(l[i], h2)
+        return h
+
+
+# print('----- createLLL3 ------')
+# list = [2, 5, 4, 8, 6, 7, 3, 1]
+# h = createLLL3(0, len(list) - 1, list)
+# printList(h)
+# print('\n-----------------------')
+
+
+def createLL1(start, n):  # create linked list 1 to n
+    if start is n:
+        return node(n)
+    else:
+        last = createLL1(start + 1, n)
+        l1 = node(start, last)
+        return l1
+
+
+# h = createLL1(1,5)
+# print('-----createLL 1-----')
+# printList(h)
+# print('\n--------------------')
+
+
+def createLL2(n, back):  # create linked list 1 to n
+    if n is 1:
+        return node(1, back)
+    else:
+        l2 = node(n, back)
+        l1 = createLL2(n - 1, l2)
+        return l1
+
+
+# h = createLL2(5, None)
+# print('-----createLL 2-----')
+# printList(h)
+# print('\n--------------------')
