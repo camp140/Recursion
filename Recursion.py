@@ -58,3 +58,14 @@ def binarySearch(lo, hi, x, l):
 
 # l = [1,2,3,4,5,6,7,8,9,10]
 # print(binarySearch(0,9,5,l))
+
+def move(n, from_rod, to_rod, aux_rod):
+    if n == 1:
+        print('move disk',n, 'from', from_rod, 'to', to_rod)
+    else:
+        move(n-1, from_rod, aux_rod, to_rod)
+        print('move disk',n, 'from', from_rod, 'to', to_rod)
+        move(n-1, aux_rod, to_rod, from_rod)
+
+# move(3,'A','C','B')
+
