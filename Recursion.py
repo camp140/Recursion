@@ -274,3 +274,42 @@ def createLL2(n, back):  # create linked list 1 to n
 # print('-----createLL 2-----')
 # printList(h)
 # print('\n--------------------')
+
+
+# knapsack
+def printSack(sack, maxi):
+    global good
+    global name
+    for i in range(maxi + 1):
+        print(good[sack[i]], end=' ')
+        # print(name[sack[i]],good[sack[i]], end=' ')
+    print()
+
+
+def pick(sack, i, mLeft, good_i):
+    global N
+    global good
+    if good_i < N:  # have something left to pick
+        price = good[good_i]  # good-price
+        if mLeft < price:  # cannot afford that good_i
+            pick(sack, i, mLeft, good_i + 1)  # try to pick next good
+        else:  # can buy
+            mLeft -= price  # pay
+            sack[i] = good_i  # pick that good_i to the sack at i
+            if mLeft == 0:  # done
+                printSack(sack, i)
+            else:  # still have moneyLeft
+                pick(sack, i + 1, mLeft, good_i + 1)
+            pick(sack, i, mLeft + price, good_i + 1)  # take the item off the sack for other solutions
+
+
+good = [20, 10, 5, 5, 3, 2, 20, 10]
+name = ['soap', 'potato chips', 'loly pop', 'toffy', 'pencil', 'rubber', 'milk', 'cookie']
+N = len(good)  # numbers of good
+
+sack = N * [-1]  # empty sack
+print(sack)
+mLeft = 20  # money left
+i = 0  # sack index
+good_i = 0  # good index
+pick(sack, i, mLeft, good_i)
